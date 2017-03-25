@@ -1,9 +1,16 @@
 FROM ruby:2.4.1
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs less vim
-RUN mkdir /rails
-WORKDIR /rails
+
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs less vim curl apt-transport-https
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq && apt-get install -y yarn
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+
+
 RUN useradd -ms /bin/bash app
 USER app
+RUN mkdir -p /home/app/rails
 COPY ./bashrc /home/app/.bashrc
 WORKDIR /home/app/rails
 ADD ../src /home/app/rails
