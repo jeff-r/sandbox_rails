@@ -7,4 +7,5 @@ USER app
 COPY ./bashrc /home/app/.bashrc
 WORKDIR /home/app/rails
 ADD ../src /home/app/rails
+EXPOSE 3000
 PUSH rails_app
