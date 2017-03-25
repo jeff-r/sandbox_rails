@@ -1,0 +1,10 @@
+FROM ruby:2.4.1
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN mkdir /rails
+WORKDIR /rails
+RUN useradd -ms /bin/bash app
+USER app
+COPY ./bashrc /home/app/.bashrc
+WORKDIR /home/app/rails
+ADD ../src /home/app/rails
+PUSH rails_app
