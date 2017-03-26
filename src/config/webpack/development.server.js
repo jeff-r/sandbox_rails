@@ -7,7 +7,7 @@ const { devServer, publicPath, paths } = require('./configuration.js')
 
 module.exports = merge(devConfig, {
   devServer: {
-    host: devServer.host,
+    host: "0.0.0.0",
     port: devServer.port,
     compress: true,
     historyApiFallback: true,
